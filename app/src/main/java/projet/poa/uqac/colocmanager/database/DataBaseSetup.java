@@ -1,0 +1,1 @@
+package projet.poa.uqac.colocmanager.database;

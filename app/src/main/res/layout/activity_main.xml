@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="projet.poa.uqac.colocmanager.MainActivity">
+    tools:context="projet.poa.uqac.colocmanager.MainActivity"
+    >
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -24,11 +25,15 @@
     <include layout="@layout/content_main" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/mainFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
+        android:src="@android:drawable/ic_menu_add"
+        app:backgroundTint="@color/colorPrimary"
+        android:onClick="onShowFab"/>
+
+    <include layout = "@layout/fab_mainactivity" />
 
 </android.support.design.widget.CoordinatorLayout>

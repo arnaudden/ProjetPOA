@@ -1,31 +1,93 @@
 package projet.poa.uqac.colocmanager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
+import projet.poa.uqac.colocmanager.Activities.*;
 public class MainActivity extends AppCompatActivity {
+
+    private FloatingActionButton fab_1;
+    private FloatingActionButton fab_2;
+    private FloatingActionButton mainFab;
+    //Animations
+    Animation show_fab;
+    Animation hide_fab_facture;
+    Animation hide_fab_utilisateur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        show_fab = AnimationUtils.loadAnimation(getApplication(), R.anim.show_fab);
+        hide_fab_utilisateur = AnimationUtils.loadAnimation(getApplication(), R.anim.hide_fab_utilisateur);
+        hide_fab_facture = AnimationUtils.loadAnimation(getApplication(), R.anim.hide_fab_facture);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+        mainFab = (FloatingActionButton) findViewById(R.id.mainFab);
+        fab_1 = (FloatingActionButton) findViewById(R.id.fab_ajouterUtilisateur);
+        fab_2 = (FloatingActionButton) findViewById(R.id.fab_ajouterFacture);
+
+
+    }
+
+    public void onShowFab(View v)
+    {
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) fab_1.getLayoutParams();
+        layoutParams.rightMargin += (int) (fab_1.getWidth() * 0.25);
+        layoutParams.bottomMargin += (int) (fab_1.getHeight() * 3.4);
+        fab_1.setLayoutParams(layoutParams);
+        fab_1.startAnimation(show_fab);
+        fab_1.setClickable(true);
+
+        FrameLayout.LayoutParams layoutParams2 = (FrameLayout.LayoutParams) fab_2.getLayoutParams();
+        layoutParams2.rightMargin += (int) (fab_2.getWidth() * 0.25);
+        layoutParams2.bottomMargin += (int) (fab_2.getHeight() * 1.7);
+        fab_2.setLayoutParams(layoutParams2);
+        fab_2.startAnimation(show_fab);
+        fab_2.setClickable(true);
+
+        mainFab.setClickable(false);
+    }
+
+    public void onClickMainScreen(View v)
+    {
+        if(!mainFab.isClickable())
+        {
+            FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) fab_1.getLayoutParams();
+            layoutParams.rightMargin -= (int) (fab_1.getWidth() * 0.25);
+            layoutParams.bottomMargin -= (int) (fab_1.getHeight() * 3.4);
+            fab_1.setLayoutParams(layoutParams);
+            fab_1.startAnimation(hide_fab_utilisateur);
+            fab_1.setClickable(false);
+
+            FrameLayout.LayoutParams layoutParams2 = (FrameLayout.LayoutParams) fab_2.getLayoutParams();
+            layoutParams2.rightMargin -= (int) (fab_2.getWidth() * 0.25);
+            layoutParams2.bottomMargin -= (int) (fab_2.getHeight() * 1.7);
+            fab_2.setLayoutParams(layoutParams2);
+            fab_2.startAnimation(hide_fab_facture);
+            fab_2.setClickable(false);
+
+            mainFab.setClickable(true);
+        }
+    }
+
+    public void onClickAddUser(View v)
+    {
+        Toast.makeText(this,"Clique sur ajouter Utilisateur",Toast.LENGTH_SHORT);
+        Intent ajouterUtilisateur = new Intent(this, UtilisateurActivity.class);
+        startActivity(ajouterUtilisateur);
     }
 
     @Override

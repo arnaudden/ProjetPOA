@@ -23,6 +23,7 @@
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/icon_facture"
         android:visibility="invisible"
+        android:onClick="onClickAddFacture"
         app:backgroundTint="@color/colorPrimary"
         app:fabSize="mini" />
 </FrameLayout>

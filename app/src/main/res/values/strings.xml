@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">ColocManager</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_facture">FactureActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+
+    <string name="rentrer_date">Rentrer une date</string>
 </resources>

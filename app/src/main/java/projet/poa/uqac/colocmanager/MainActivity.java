@@ -90,6 +90,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(ajouterUtilisateur);
     }
 
+    public void onClickAddFacture(View v)
+    {
+        Toast.makeText(this,"Clique sur ajouter facture", Toast.LENGTH_SHORT);
+        Intent ajouterFacture = new Intent(this, FactureActivity.class);
+        startActivity(ajouterFacture);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

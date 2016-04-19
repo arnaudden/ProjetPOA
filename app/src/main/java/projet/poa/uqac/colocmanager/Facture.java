@@ -17,6 +17,8 @@ public class Facture {
 
     private String description;
 
+    private Utilisateur payeur;
+
     private ArrayList<Utilisateur> listePersonneIntervenant;
 
     private double coutTotal;

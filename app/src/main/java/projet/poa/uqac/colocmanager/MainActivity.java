@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this,"Clique sur ajouter Utilisateur",Toast.LENGTH_SHORT);
         Intent ajouterUtilisateur = new Intent(this, UtilisateurActivity.class);
         startActivity(ajouterUtilisateur);
+        System.out.println(" classe Clique sur addUser");
     }
 
     @Override

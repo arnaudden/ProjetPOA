@@ -23,13 +23,12 @@ public class RegisterRequest extends StringRequest{
         credentials.put( "password", password);
         credentials.put( "prenom", prenom);
         credentials.put( "nom", nom);
-        credentials.put( "dette", "0.00");
+        credentials.put( "dette", 0.0 + "");
     }
 
 
     public Map<String, String> getCredentials()
-    {
-        return credentials;
+    {return credentials;
     }
 
 }

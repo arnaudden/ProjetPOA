@@ -57,10 +57,9 @@ public class UtilisateurActivity extends AppCompatActivity {
     {
         Toast.makeText(this, "EnregistrerUSer", Toast.LENGTH_SHORT);
         final String pseudo = _pseudoED.getText().toString();
-        final String nom = _nomED.getText().toString();
-        final String prenom = _prenomET.getText().toString();
         final String password = "banana";
-        final float dette = 0.0f;
+        final String prenom = _prenomET.getText().toString();
+        final String nom = _nomED.getText().toString();
 
         Response.Listener<String> responseListener = new Response.Listener<String>()
         {
@@ -69,7 +68,8 @@ public class UtilisateurActivity extends AppCompatActivity {
             {
                 try {
                     JSONObject JSonsresponse = new JSONObject(response);
-                    if( JSonsresponse.getBoolean("success"))
+                    boolean success = JSonsresponse.getBoolean("success");
+                    if( success)
                     {
                         Intent intent = new Intent( UtilisateurActivity.this, MainActivity.class);
                         UtilisateurActivity.this.startActivity(intent);

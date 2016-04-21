@@ -3,6 +3,9 @@ package projet.poa.uqac.colocmanager.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+
 import projet.poa.uqac.colocmanager.Facture;
 
 /**
@@ -10,11 +13,12 @@ import projet.poa.uqac.colocmanager.Facture;
  */
 public class FactureDataBase extends SQLiteOpenHelper
 {
+    private ArrayList<Facture> listBills;
     public FactureDataBase(Context context)
     {
         super(context, "CollocManager.db", null, 1);
         SQLiteDatabase database = this.getWritableDatabase();
-        listBills = new arrayLList<Facture>();
+        listBills = new ArrayList<Facture>();
     }
     @Override
     public void onCreate(SQLiteDatabase db)

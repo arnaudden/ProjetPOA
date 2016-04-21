@@ -9,13 +9,13 @@ import org.aspectj.lang.annotation.Pointcut;
 
 import projet.poa.uqac.colocmanager.MainActivity;
 
-public aspect Log {
+public aspect Test {
 
     public pointcut callAddUser() : execution(void MainActivity.onClickAddUser(..));
 
     before () : callAddUser()
     {
-        System.out.println(" aspect Clique sur addUser");
+        System.out.println(" aspect test Clique sur addUser");
     }
 
 

@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class RegisterRequest extends StringRequest{
 
-    private static final String REGISTER_REQUEST_URL = "applicolloc.netne.net/Register.php";
+    private static final String REGISTER_REQUEST_URL = "http://applicolloc.netne.net/Register.php";
     private Map<String, String> credentials;
 
     public RegisterRequest(String pseudo, String password, String prenom, String nom, Response.Listener<String> listener)
@@ -23,10 +23,10 @@ public class RegisterRequest extends StringRequest{
         credentials.put( "password", password);
         credentials.put( "prenom", prenom);
         credentials.put( "nom", nom);
-        credentials.put( "dette", 0.00);
+        credentials.put( "dette", "0.00");
     }
 
-    @Override
+
     public Map<String, String> getCredentials()
     {
         return credentials;

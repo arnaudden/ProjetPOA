@@ -101,6 +101,6 @@
         android:id="@+id/BT_enregistrerUtilisateur"
         android:text="Enregister"
         android:textSize="40dp"
-        android:onClick="onClickEregisterUser"/>
+        android:onClick="onClickEnregisterUser"/>
 
 </RelativeLayout>

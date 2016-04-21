@@ -12,8 +12,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.reflect.Array;
 
 import projet.poa.uqac.colocmanager.MainActivity;
 import projet.poa.uqac.colocmanager.R;
@@ -22,7 +28,6 @@ import projet.poa.uqac.colocmanager.Utilisateur;
 
 public class UtilisateurActivity extends AppCompatActivity {
 
-    private Button _enregistrerbutton;
 
     private EditText _prenomET;
 
@@ -38,7 +43,6 @@ public class UtilisateurActivity extends AppCompatActivity {
         _prenomET = (EditText) findViewById(R.id.TV_Prenom);
         _nomED = (EditText) findViewById(R.id.TV_Nom);
         _pseudoED = (EditText) findViewById(R.id.TV_Pseudo);
-        _enregistrerbutton = (Button) findViewById(R.id.BT_enregistrerUtilisateur);
     }
 
 
@@ -49,7 +53,7 @@ public class UtilisateurActivity extends AppCompatActivity {
         startActivity(main);
     }
 
-    public void onClickEnregistrerUser(View v)
+    public void onClickEnregisterUser(View v)
     {
         Toast.makeText(this, "EnregistrerUSer", Toast.LENGTH_SHORT);
         final String pseudo = _pseudoED.getText().toString();
@@ -64,7 +68,7 @@ public class UtilisateurActivity extends AppCompatActivity {
             public void onResponse( String response)
             {
                 try {
-                    JSONObject JSonsresponse = new JSONObject( response);
+                    JSONObject JSonsresponse = new JSONObject(response);
                     if( JSonsresponse.getBoolean("success"))
                     {
                         Intent intent = new Intent( UtilisateurActivity.this, MainActivity.class);
@@ -82,7 +86,7 @@ public class UtilisateurActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        }
+        };
 
         RegisterRequest regRequest = new RegisterRequest( pseudo, password, prenom, nom, responseListener);
         RequestQueue queue = Volley.newRequestQueue(UtilisateurActivity.this);

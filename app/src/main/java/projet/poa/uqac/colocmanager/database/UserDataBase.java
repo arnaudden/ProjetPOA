@@ -18,15 +18,13 @@ public class UserDataBase extends SQLiteOpenHelper{
     {
         super(context, "CollocManager.db", null, 1);
         SQLiteDatabase database = this.getWritableDatabase();
-        listUsers = new arrayList<Utilisateur>();
-        listBills = new arrayLList<Facture>();
+        listUsers = new ArrayList<Utilisateur>();
     }
 
-    SQLi
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.
+
         db.execSQL("CREATE TABLE IF NOT EXISTS user("+
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 "prenom STRING, "+

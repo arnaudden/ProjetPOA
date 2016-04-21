@@ -15,7 +15,7 @@ public class RegisterRequest extends StringRequest{
     private static final String REGISTER_REQUEST_URL = "applicolloc.netne.net/Register.php";
     private Map<String, String> credentials;
 
-    private RegisterRequest( String pseudo, String password, String prenom, String nom), Response.Listener<String> listener)
+    public RegisterRequest(String pseudo, String password, String prenom, String nom, Response.Listener<String> listener)
     {
         super( Method.POST, REGISTER_REQUEST_URL, listener, null);
         credentials = new HashMap<>();
@@ -24,6 +24,12 @@ public class RegisterRequest extends StringRequest{
         credentials.put( "prenom", prenom);
         credentials.put( "nom", nom);
         credentials.put( "dette", 0.00);
+    }
+
+    @Override
+    public Map<String, String> getCredentials()
+    {
+        return credentials;
     }
 
 }

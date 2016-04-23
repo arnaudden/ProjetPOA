@@ -58,7 +58,6 @@ public class UserDataBase extends SQLiteOpenHelper{
     public ArrayList<Utilisateur> getUsers()
 
     {
-
         listUsers.clear();
         SQLiteDatabase db = this.getWritableDatabase();
 

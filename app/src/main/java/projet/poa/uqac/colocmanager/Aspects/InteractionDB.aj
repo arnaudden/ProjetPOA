@@ -16,6 +16,7 @@ import projet.poa.uqac.colocmanager.Activities.UtilisateurActivity;
 import projet.poa.uqac.colocmanager.Activities.FactureActivity;
 import projet.poa.uqac.colocmanager.database.*;
 import projet.poa.uqac.colocmanager.Utilisateur;
+import projet.poa.uqac.colocmanager.Facture;
 
 public aspect InteractionDB {
 
@@ -25,6 +26,7 @@ public aspect InteractionDB {
 
     public pointcut callOnCreate() : execution(void *.onCreate(..));
     public pointcut callOnAddUser(Utilisateur u) : execution(void UtilisateurActivity.saveUserInDb(..)) && args(u);
+    public pointcut callOnSaveBill(Facture f) : execution(void FactureActivity.saveBillInDB(..) && args(f));
 
 
     after (): callOnCreate()
@@ -61,9 +63,26 @@ public aspect InteractionDB {
     void around (Utilisateur u) : callOnAddUser(u)
     {
         System.out.println(" aspect ajout utilisateur");
-        userdb.addUser(u);
-        System.out.println(u.toString() + "a été ajouté dans la BDD");
+        if( isUsernameAvailable(u))
+            userdb.addUser(u);
+            System.out.println(u.toString() + "a été ajouté dans la BDD");
     }
 
+    void around( Facture f) : callOnSaveBill(f)
+    {
+        System.out.println(" aspect ajout facture");
+        //f.get
+    }
+
+    boolean isUsernameAvailable(Utilisateur u)
+    {
+        ArrayList<Utilisateur> listUser = userdb.getUsers();
+        for( i = 0; i < listUser.size(); i++)
+        {
+            if( listUser.get(i).getPseudo() == u.getPseudo())
+                return false
+        }
+        return true;
+    }
 
 }

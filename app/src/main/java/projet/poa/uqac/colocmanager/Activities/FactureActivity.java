@@ -10,12 +10,14 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
+import projet.poa.uqac.colocmanager.Facture;
 import projet.poa.uqac.colocmanager.MainActivity;
 import projet.poa.uqac.colocmanager.R;
 import projet.poa.uqac.colocmanager.Utilisateur;
@@ -107,7 +109,33 @@ public class FactureActivity extends AppCompatActivity {
 
     public void onClickSaveBill(View v)
     {
+        Toast.makeText(this, "EnregistrerFacture", Toast.LENGTH_SHORT).show();
+        final String dateFacture = ed_Date.getText().toString();
+        final String titre = ed_Titre.getText().toString();
+        final String magasin = ed_Magasin.getText().toString();
+        final String description = ed_Description.getText().toString();
+        final String pseudoUsers = ed_participant.getText().toString();
+        String[] splitUser = pseudoUsers.split("; ");
 
+
+        final double coutTotal = Double.parseDouble(ed_prixAchat.getText().toString());
+
+        ArrayList<Utilisateur> listParticipants;
+        for( int i = 0; i < splitUser.length; i++)
+        {
+            //Faudrait avoir la liste des utilisateurs ici...
+            listParticipants.add(i, Returneduser);
+        }
+        Facture f = new Facture( dateFacture, titre, magasin, description, listParticipants, coutTotal);
+        saveBillInDB(f);
+        Intent main = new Intent(this, MainActivity.class);
+        this.finish();
+        startActivity(main);
+
+    }
+
+    public void saveBillInDB(Facture f)
+    {
 
     }
 

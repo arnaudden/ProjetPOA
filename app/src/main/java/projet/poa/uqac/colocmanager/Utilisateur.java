@@ -41,4 +41,10 @@ public class Utilisateur {
     public String getNom() {
         return nom;
     }
+
+    public String toString()
+    {
+        String str = "Prénom : " + prenom + " nom : " + nom + " a une dette de " + dette + " $";
+        return str;
+    }
 }

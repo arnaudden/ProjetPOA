@@ -13,6 +13,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import projet.poa.uqac.colocmanager.Activities.*;
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     Animation show_fab;
     Animation hide_fab_facture;
     Animation hide_fab_utilisateur;
+
+    ArrayList<Utilisateur> listUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         fab_1 = (FloatingActionButton) findViewById(R.id.fab_ajouterUtilisateur);
         fab_2 = (FloatingActionButton) findViewById(R.id.fab_ajouterFacture);
 
-
+        listUser = new ArrayList<Utilisateur>();
     }
 
     public void onShowFab(View v)
@@ -59,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
         fab_2.setClickable(true);
 
         mainFab.setClickable(false);
+
+        for(int i =0; i<listUser.size(); i++)
+        {
+            System.out.println("ListUser de la classe MainActivity : " + listUser.get(i).toString());
+        }
     }
 
     public void onClickMainScreen(View v)
@@ -85,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickAddUser(View v)
     {
-        Toast.makeText(this,"Clique sur ajouter Utilisateur",Toast.LENGTH_SHORT);
+        Toast.makeText(this,"Clique sur ajouter Utilisateur",Toast.LENGTH_SHORT).show();
         Intent ajouterUtilisateur = new Intent(this, UtilisateurActivity.class);
         startActivity(ajouterUtilisateur);
         System.out.println(" classe Clique sur addUser");
@@ -93,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickAddFacture(View v)
     {
-        Toast.makeText(this,"Clique sur ajouter facture", Toast.LENGTH_SHORT);
+        Toast.makeText(this,"Clique sur ajouter facture", Toast.LENGTH_SHORT).show();
         Intent ajouterFacture = new Intent(this, FactureActivity.class);
         startActivity(ajouterFacture);
     }

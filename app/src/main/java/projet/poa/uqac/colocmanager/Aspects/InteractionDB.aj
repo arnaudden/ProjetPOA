@@ -23,14 +23,16 @@ public aspect InteractionDB {
     private UserDataBase userdb;
 
     public pointcut callOnCreate() : execution(void *.onCreate(..));
+    public pointcut callOnAddUser(Utilisateur u) : execution(void UtilisateurActivity.saveUserInDb(..)) && args(u);
+
 
     after (): callOnCreate()
             {
                 AppCompatActivity activity = (AppCompatActivity) thisJoinPoint.getThis();
                 userdb = new UserDataBase(activity);
                 Utilisateur u = new Utilisateur("Arnaud" , "DENIZET", 0);
-                userdb.addUser(u);
-                System.out.println(" aspect ajout utilisateur");
+                //userdb.addUser(u);
+                //System.out.println(" aspect ajout utilisateur");
                 ArrayList<Utilisateur> listUser = userdb.getUsers();
                 for(int i =0; i<listUser.size(); i++)
                         {
@@ -39,8 +41,27 @@ public aspect InteractionDB {
                 String className = activity.getClass().toString();
                 Field[] fields = activity.getClass().getFields();
                 Field f;
-
-
+                for(int i =0; i<fields.length; i++)
+                        {
+                            f = fields[i];
+                            if (f.getName() == "listUser")
+                            {
+                                try{
+                                    f.set(activity, listUser);
+                                }
+                                catch(Exception e) {
+                                e.printStackTrace();
+                                }
+                            }
+                        }
             }
+
+    void around (Utilisateur u) : callOnAddUser(u)
+    {
+        System.out.println(" aspect ajout utilisateur");
+        userdb.addUser(u);
+        System.out.println(u.toString() + "a été ajouté dans la BDD");
+    }
+
 
 }

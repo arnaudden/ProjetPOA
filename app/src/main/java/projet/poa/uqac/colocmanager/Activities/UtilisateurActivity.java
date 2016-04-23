@@ -23,9 +23,9 @@ import projet.poa.uqac.colocmanager.Utilisateur;
 public class UtilisateurActivity extends AppCompatActivity {
 
 
-     EditText _prenomET;
+    private EditText _prenomET;
 
-     EditText _nomED;
+    private EditText _nomED;
 
     ArrayList<Utilisateur> listUser;
 
@@ -48,13 +48,12 @@ public class UtilisateurActivity extends AppCompatActivity {
 
     public void onClickEnregisterUser(View v)
     {
-        Toast.makeText(this, "EnregistrerUSer", Toast.LENGTH_SHORT);
+        Toast.makeText(this, "EnregistrerUSer", Toast.LENGTH_SHORT).show();
         final String prenom = _prenomET.getText().toString();
         final String nom = _nomED.getText().toString();
         double d = 0;
         Utilisateur u = new Utilisateur(prenom, nom, d);
-
-
+        saveUserInDb(u);
         Intent main = new Intent(this, MainActivity.class);
         this.finish();
         startActivity(main);

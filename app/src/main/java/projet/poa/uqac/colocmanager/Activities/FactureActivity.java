@@ -12,29 +12,53 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
 import projet.poa.uqac.colocmanager.MainActivity;
 import projet.poa.uqac.colocmanager.R;
+import projet.poa.uqac.colocmanager.Utilisateur;
+import projet.poa.uqac.colocmanager.database.UserDataBase;
 
 public class FactureActivity extends AppCompatActivity {
 
 
     private Calendar newCalendar;
 
-    private EditText editDate;
+    private EditText ed_Date;
+
+    private EditText ed_Titre;
+
+    private EditText ed_Magasin;
+
+    private EditText ed_participant;
+
+    private EditText ed_prixAchat;
+
+    private EditText ed_Description;
 
     private SimpleDateFormat dateFormat;
+
+
+    ArrayList<Utilisateur> listUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_facture);
         newCalendar = Calendar.getInstance();
-        editDate =(EditText) findViewById(R.id.EDpp_date_date);
-        System.out.println(editDate.getText());
         dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.CANADA_FRENCH);
+
+        ed_Date =(EditText) findViewById(R.id.ED_date);
+        ed_Description = (EditText) findViewById(R.id.ED_description);
+        ed_Magasin = (EditText) findViewById(R.id.ED_magasin);
+        ed_participant = (EditText) findViewById(R.id.ED_participant);
+        ed_Titre = (EditText) findViewById(R.id.ED_titref);
+        ed_prixAchat = (EditText) findViewById(R.id.ED_prixachat);
+
         super.onCreate(savedInstanceState);
 
+        listUser = new ArrayList<>();
     }
 
     @Override
@@ -67,7 +91,7 @@ public class FactureActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                editDate.setText(dateFormat.format(newDate.getTime()));
+                ed_Date.setText(dateFormat.format(newDate.getTime()));
                 newCalendar.set(year, monthOfYear, dayOfMonth);
             }
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -81,5 +105,10 @@ public class FactureActivity extends AppCompatActivity {
         startActivity(main);
     }
 
+    public void onClickSaveBill(View v)
+    {
+
+
+    }
 
 }

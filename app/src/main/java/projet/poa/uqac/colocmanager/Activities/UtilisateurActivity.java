@@ -27,6 +27,7 @@ public class UtilisateurActivity extends AppCompatActivity {
 
     private EditText _nomED;
 
+    private EditText _pseudoED;
     ArrayList<Utilisateur> listUser;
 
     @Override
@@ -35,6 +36,7 @@ public class UtilisateurActivity extends AppCompatActivity {
         setContentView(R.layout.activity_utilisateur);
         _prenomET = (EditText) findViewById(R.id.TV_Prenom);
         _nomED = (EditText) findViewById(R.id.TV_Nom);
+        _pseudoED = (EditText) findViewById(R.id.TV_Pseudo);
         listUser = new ArrayList<Utilisateur>();
     }
 
@@ -50,9 +52,10 @@ public class UtilisateurActivity extends AppCompatActivity {
     {
         Toast.makeText(this, "EnregistrerUSer", Toast.LENGTH_SHORT).show();
         final String prenom = _prenomET.getText().toString();
+        final String pseudo = _pseudoED.getText().toString();
         final String nom = _nomED.getText().toString();
         double d = 0;
-        Utilisateur u = new Utilisateur(prenom, nom, d);
+        Utilisateur u = new Utilisateur(prenom, nom, pseudo, d);
         saveUserInDb(u);
         Intent main = new Intent(this, MainActivity.class);
         this.finish();

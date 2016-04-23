@@ -21,6 +21,7 @@ public aspect InteractionDB {
 
 
     private UserDataBase userdb;
+    private FactureDataBase billsDb;
 
     public pointcut callOnCreate() : execution(void *.onCreate(..));
     public pointcut callOnAddUser(Utilisateur u) : execution(void UtilisateurActivity.saveUserInDb(..)) && args(u);
@@ -30,7 +31,8 @@ public aspect InteractionDB {
             {
                 AppCompatActivity activity = (AppCompatActivity) thisJoinPoint.getThis();
                 userdb = new UserDataBase(activity);
-                Utilisateur u = new Utilisateur("Arnaud" , "DENIZET", 0);
+                billsDb = new FactureDataBase(activity);
+                //Utilisateur u = new Utilisateur("Arnaud" , "DENIZET", "arnaudden", 0);
                 //userdb.addUser(u);
                 //System.out.println(" aspect ajout utilisateur");
                 ArrayList<Utilisateur> listUser = userdb.getUsers();

@@ -12,14 +12,17 @@ public class Utilisateur {
 
     private String nom;
 
+    private String pseudo;
+
     private double dette;
 
 
 
-    public Utilisateur(String n, String p, double d)
+    public Utilisateur(String n, String p, String pseudo, double d)
     {
         nom = n;
         prenom = p;
+        this.pseudo = pseudo;
         dette = d;
     }
 
@@ -40,6 +43,10 @@ public class Utilisateur {
 
     public String getNom() {
         return nom;
+    }
+
+    public String getPseudo() {
+        return pseudo;
     }
 
     public String toString()

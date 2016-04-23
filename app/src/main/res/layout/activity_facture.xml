@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Titre de la facture"
-                android:id="@+id/id_Facture_Titre"
+                android:id="@+id/ED_titref"
                 android:singleLine="true"
                 android:paddingTop="20dp"
                 android:textSize="20dp" />
@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Magasin d&apos;achat"
-                android:id="@+id/id_Facture_Magasin"
+                android:id="@+id/ED_magasin"
                 android:singleLine="true"
                 android:paddingTop="20dp"
                 android:textSize="20dp"
@@ -83,7 +83,7 @@
                 android:textSize="20dp"
                 android:hint="@string/rentrer_date"
                 android:onClick="onClickAddDate"
-                android:id="@+id/EDpp_date_date"
+                android:id="@+id/ED_date"
                 android:text="@string/rentrer_date"/>
 
         </LinearLayout>
@@ -97,19 +97,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingTop="20dp"
-                android:text="Payeur :"
+                android:text="Description :"
                 android:textSize="20dp"
                 android:editable="false"
-                android:id="@+id/TV_payeur" />
+                />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Nom du payeur"
-                android:id="@+id/id_Facture_Payeur"
-                android:singleLine="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:paddingTop="20dp"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:hint="Description de la facture"
+                android:id="@+id/ED_description" />
 
         </LinearLayout>
 
@@ -130,8 +129,8 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Liste des participants"
-                android:id="@+id/editText2"
+                android:hint="Rentrer le pseudo du participant"
+                android:id="@+id/ED_participant"
                 android:singleLine="true"
                 android:paddingTop="20dp"
                 android:textSize="20dp" />
@@ -155,7 +154,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Prix de l&apos;achat"
-                android:id="@+id/editText3"
+                android:id="@+id/ED_prixachat"
                 android:singleLine="true"
                 android:paddingTop="20dp"
                 android:textSize="20dp" />
@@ -171,7 +170,7 @@
         android:id="@+id/button"
         android:text="Enregister"
         android:textSize="40dp"
-        android:onClick="" />
+        android:onClick="onClickSaveBill" />
 
 
 

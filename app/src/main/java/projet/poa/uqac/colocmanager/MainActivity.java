@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     Animation hide_fab_utilisateur;
 
     ArrayList<Utilisateur> listUser;
+    ArrayList<Facture> listFacture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         fab_2 = (FloatingActionButton) findViewById(R.id.fab_ajouterFacture);
 
         listUser = new ArrayList<Utilisateur>();
+        listFacture = new ArrayList<Facture>();
     }
 
     public void onShowFab(View v)

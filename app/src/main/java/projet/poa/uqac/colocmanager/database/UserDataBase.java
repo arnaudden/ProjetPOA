@@ -20,17 +20,19 @@ public class UserDataBase extends SQLiteOpenHelper{
     {
         super(context, "CollocManager.db", null, 1);
         SQLiteDatabase database = this.getWritableDatabase();
+        //onCreate(database);
         listUsers = new ArrayList<Utilisateur>();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-
+        //db.execSQL("DROP TABLE IF EXISTS user");
         db.execSQL("CREATE TABLE IF NOT EXISTS user("+
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 "prenom string, "+
                 "nom string, "+
+                "pseudo string, " +
                 "dette REAL"+
                 ")");
     }
@@ -44,9 +46,10 @@ public class UserDataBase extends SQLiteOpenHelper{
 
     public void addUser(Utilisateur u)
     {
-        this.getWritableDatabase().execSQL("INSERT INTO user (prenom, nom, dette) VALUES ('" +
+        this.getWritableDatabase().execSQL("INSERT INTO user (prenom, nom, pseudo, dette) VALUES ('" +
                 u.getPrenom() + "','" +
                 u.getNom()+ "','" +
+                u.getPseudo() + "','" +
                 u.getDette() +  "')");
         this.getWritableDatabase().close();
 
@@ -63,14 +66,17 @@ public class UserDataBase extends SQLiteOpenHelper{
 
         String prenom;
         String nom;
+        String pseudo;
         double dette;
+
 
         for(usersSaved.moveToFirst(); !usersSaved.isAfterLast(); usersSaved.moveToNext())
         {
             prenom = usersSaved.getString(1);
             nom = usersSaved.getString(2);
-            dette = usersSaved.getDouble(3);
-            Utilisateur u = new Utilisateur(prenom,nom,dette);
+            pseudo = usersSaved.getString(3);
+            dette = usersSaved.getDouble(4);
+            Utilisateur u = new Utilisateur(prenom,nom, pseudo, dette);
             listUsers.add(u);
         }
         return listUsers;

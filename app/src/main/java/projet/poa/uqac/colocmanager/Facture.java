@@ -9,7 +9,7 @@ import java.util.GregorianCalendar;
  */
 public class Facture {
 
-    private GregorianCalendar dateAchat;
+    private String dateAchat;
 
     private String titre;
 
@@ -21,6 +21,8 @@ public class Facture {
 
     private ArrayList<Utilisateur> listePersonneIntervenant;
 
+    private Utilisateur beneficiaire;
+
     private double coutTotal;
 
     private double coutParPersonne;
@@ -28,7 +30,28 @@ public class Facture {
     private boolean factureReglee;
 
 
-    public Facture(GregorianCalendar date,
+    public Facture(String date,
+                   String t, String magasin,
+                   String descr, Utilisateur u,
+                   double coutTot, boolean isReglee)
+    {
+
+        dateAchat = date;
+
+        titre = t;
+
+        magasinAchat = magasin;
+
+        description = descr;
+
+        beneficiaire = u;
+
+        coutTotal = coutTot;
+
+        factureReglee = isReglee;
+    }
+
+    public Facture(String date,
                    String t, String magasin,
                    String descr, ArrayList<Utilisateur> listPerson,
                    double coutTot)
@@ -51,7 +74,7 @@ public class Facture {
         factureReglee = false;
     }
 
-    public GregorianCalendar getDateAchat() {
+    public String getDateAchat() {
         return dateAchat;
     }
 

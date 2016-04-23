@@ -12,29 +12,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import projet.poa.uqac.colocmanager.MainActivity;
 import projet.poa.uqac.colocmanager.R;
 import projet.poa.uqac.colocmanager.RegisterRequest;
+import projet.poa.uqac.colocmanager.database.*;
 import projet.poa.uqac.colocmanager.Utilisateur;
 
 public class UtilisateurActivity extends AppCompatActivity {
 
 
-    private EditText _prenomET;
+     EditText _prenomET;
 
-    private EditText _nomED;
+     EditText _nomED;
 
-    private EditText _pseudoED;
-
+    ArrayList<Utilisateur> listUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +35,7 @@ public class UtilisateurActivity extends AppCompatActivity {
         setContentView(R.layout.activity_utilisateur);
         _prenomET = (EditText) findViewById(R.id.TV_Prenom);
         _nomED = (EditText) findViewById(R.id.TV_Nom);
-        _pseudoED = (EditText) findViewById(R.id.TV_Pseudo);
+        listUser = new ArrayList<Utilisateur>();
     }
 
 
@@ -56,18 +49,23 @@ public class UtilisateurActivity extends AppCompatActivity {
     public void onClickEnregisterUser(View v)
     {
         Toast.makeText(this, "EnregistrerUSer", Toast.LENGTH_SHORT);
-        final String pseudo = _pseudoED.getText().toString();
-        final String password = "banana";
         final String prenom = _prenomET.getText().toString();
         final String nom = _nomED.getText().toString();
+        double d = 0;
+        Utilisateur u = new Utilisateur(prenom, nom, d);
 
+
+        Intent main = new Intent(this, MainActivity.class);
+        this.finish();
+        startActivity(main);
+        /*
         Response.Listener<String> responseListener = new Response.Listener<String>()
         {
             @Override
-            public void onResponse( String response)
+            public void onResponse(String response)
             {
                 try {
-                    JSONObject JSonsresponse = new JSONObject(response);
+                    JSONObject JSonsresponse = response;
                     boolean success = JSonsresponse.getBoolean("success");
                     if( success)
                     {
@@ -91,10 +89,12 @@ public class UtilisateurActivity extends AppCompatActivity {
         RegisterRequest regRequest = new RegisterRequest( pseudo, password, prenom, nom, responseListener);
         RequestQueue queue = Volley.newRequestQueue(UtilisateurActivity.this);
         queue.add(regRequest);
+        */
+
+
     }
 
-
-    public void saveUser(View v)
+    public void saveUserInDb(Utilisateur u)
     {
 
     }

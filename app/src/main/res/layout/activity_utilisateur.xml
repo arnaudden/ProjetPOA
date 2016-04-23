@@ -67,30 +67,6 @@
                 android:onClick="saveUser"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingTop="20dp"
-                android:text="Pseudo : "
-                android:textSize="20dp"
-                android:editable="false"
-                />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Entrez votre pseudo"
-                android:id="@+id/TV_Pseudo"
-                android:singleLine="true"
-                android:paddingTop="20dp"
-                android:textSize="20dp"/>
-        </LinearLayout>
     </LinearLayout>
 
     <Button

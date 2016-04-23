@@ -1,5 +1,7 @@
 package projet.poa.uqac.colocmanager;
 
+
+
 /**
  * Classe qui gère les utilisateurs
  * Created by Arnaud
@@ -10,16 +12,15 @@ public class Utilisateur {
 
     private String nom;
 
-    private String pseudo;
-
     private double dette;
 
-    public Utilisateur(String n, String p, String pseudo)
+
+
+    public Utilisateur(String n, String p, double d)
     {
         nom = n;
         prenom = p;
-        this.pseudo = pseudo;
-        dette = 0;
+        dette = d;
     }
 
     public void setDette(double d)
@@ -37,5 +38,7 @@ public class Utilisateur {
         return prenom;
     }
 
-
+    public String getNom() {
+        return nom;
+    }
 }

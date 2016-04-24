@@ -33,7 +33,7 @@ public class Facture {
     public Facture(String date,
                    String t, String magasin,
                    String descr, Utilisateur u,
-                   double coutTot, boolean isReglee)
+                   double coutTot)
     {
 
         dateAchat = date;
@@ -47,8 +47,6 @@ public class Facture {
         beneficiaire = u;
 
         coutTotal = coutTot;
-
-        factureReglee = isReglee;
     }
 
     public Facture(String date,
@@ -64,6 +62,10 @@ public class Facture {
         magasinAchat = magasin;
 
         description = descr;
+
+        beneficiaire = listPerson.get(0);
+
+        listPerson.remove(0);
 
         listePersonneIntervenant = listPerson;
 

@@ -17,6 +17,10 @@ public class Utilisateur {
     private double dette;
 
 
+    public Utilisateur()
+    {
+
+    }
 
     public Utilisateur(String n, String p, String pseudo, double d)
     {

@@ -26,7 +26,7 @@ public aspect InteractionDB {
 
     public pointcut callOnCreate() : execution(void *.onCreate(..));
     public pointcut callOnAddUser(Utilisateur u) : execution(void UtilisateurActivity.saveUserInDb(..)) && args(u);
-    public pointcut callOnSaveBill(Facture f) : execution(void FactureActivity.saveBillInDB(..) && args(f));
+    public pointcut callOnSaveBill( String pseudo, ArrayList<String> participants) : execution(Facture FactureActivity.saveBillInDB(..) && args(pseudo, participants));
 
 
     after (): callOnCreate()
@@ -68,11 +68,43 @@ public aspect InteractionDB {
             System.out.println(u.toString() + "a été ajouté dans la BDD");
     }
 
-    void around( Facture f) : callOnSaveBill(f)
+    void around( String pseudo, ArrayList<String> participants) : callOnSaveBill(pseudo, participants)
     {
-        System.out.println(" aspect ajout facture");
-        //f.get
+        System.out.println(" aspect initialize facture");
+
+        ArrayList<Utilisateur> allUsers = userdb.getUsers();
+        ArrayList<Utilisateur> involvedUsers;
+        int index = 0;
+        for( int i = 0; i < allUsers.size; i++)
+        {
+            if( allUsers.get(i).getPseudo == pseudo)
+            {
+                involvedUsers.add( index, allUsers.get(i));
+                index++;
+            }
+        }
+
+        for( int i = 0; i < allUsers.size; i++)
+        {
+            for( int j = 0; j < participants.size; j++)
+            {
+               if( allUsers.get(i).getPseudo() == participants.get(j))
+               {
+                   involvedUsers.add( index, allUsers.get(i));
+                   index++;
+               }
+            }
+        }
+        return involvedUsers;
     }
+
+    // Corriger comment on obtient la facture...
+     void after() returning(Facture f) : call( callOnSaveBill(..))
+     {
+        System.out.println(" aspect add facture");
+        billsDb.addFacture(f);
+        System.out.println(f.toString() + "a été ajouté dans la BDD");
+      }
 
     boolean isUsernameAvailable(Utilisateur u)
     {

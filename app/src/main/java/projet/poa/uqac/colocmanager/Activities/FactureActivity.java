@@ -120,23 +120,25 @@ public class FactureActivity extends AppCompatActivity {
 
         final double coutTotal = Double.parseDouble(ed_prixAchat.getText().toString());
 
-        ArrayList<Utilisateur> listParticipants;
+        ArrayList<String> listParticipants = new ArrayList<String>();
         for( int i = 0; i < splitUser.length; i++)
         {
             //Faudrait avoir la liste des utilisateurs ici...
-            listParticipants.add(i, Returneduser);
+            listParticipants.add(i, splitUser[i]);
         }
-        Facture f = new Facture( dateFacture, titre, magasin, description, listParticipants, coutTotal);
-        saveBillInDB(f);
+
+        Utilisateur u = new Utilisateur();
+        saveBillInDB( dateFacture, titre, magasin, description, pseudoUsers, u, listParticipants, coutTotal);
         Intent main = new Intent(this, MainActivity.class);
         this.finish();
         startActivity(main);
 
     }
 
-    public void saveBillInDB(Facture f)
+    public Facture saveBillInDB( String dateFacture, String titre, String magasin, String description, String nomProprietaire, ArrayList<Utilisateur> users, ArrayList<String> participants, double coutTotal)
     {
-
+        Facture f = new Facture( dateFacture, titre, magasin, description, users, coutTotal);
+        return f;
     }
 
 }

@@ -12,6 +12,10 @@ import projet.poa.uqac.colocmanager.Utilisateur;
 
 import java.util.ArrayList;
 
+/**
+ *
+ */
+
 public class UserDataBase extends SQLiteOpenHelper{
 
     private ArrayList<Utilisateur> listUsers;
@@ -20,7 +24,7 @@ public class UserDataBase extends SQLiteOpenHelper{
     {
         super(context, "CollocManager.db", null, 1);
         SQLiteDatabase database = this.getWritableDatabase();
-        //onCreate(database);
+        onCreate(database);
         listUsers = new ArrayList<Utilisateur>();
     }
 
@@ -81,5 +85,10 @@ public class UserDataBase extends SQLiteOpenHelper{
         return listUsers;
     }
 
+    public void updateDette(Utilisateur u)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE user SET dette = '" + u.getDette() + "' WHERE pseudo = '" + u.getPseudo() + "'");
+    }
 
 }

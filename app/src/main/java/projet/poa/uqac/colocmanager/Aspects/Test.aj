@@ -8,7 +8,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
-import projet.poa.uqac.colocmanager.MainActivity;
 import projet.poa.uqac.colocmanager.Activities.UtilisateurActivity;
 import projet.poa.uqac.colocmanager.Activities.FactureActivity;
 

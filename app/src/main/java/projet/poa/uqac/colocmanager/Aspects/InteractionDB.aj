@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import android.support.v7.app.AppCompatActivity;
 
 
-import projet.poa.uqac.colocmanager.MainActivity;
+import projet.poa.uqac.colocmanager.Activities.MainActivity;
 import projet.poa.uqac.colocmanager.Activities.UtilisateurActivity;
 import projet.poa.uqac.colocmanager.Activities.FactureActivity;
 import projet.poa.uqac.colocmanager.database.*;
@@ -23,10 +23,12 @@ public aspect InteractionDB {
 
     private UserDataBase userdb;
     private FactureDataBase billsDb;
+    private ArrayList<Utilisateur> listUser;
+    private ArrayList<Facture> listBills;
 
-    public pointcut callOnCreate() : execution(void *.onCreate(..));
-    public pointcut callOnAddUser(Utilisateur u) : execution(void UtilisateurActivity.saveUserInDb(..)) && args(u);
-    public pointcut callOnSaveBill( String pseudo, ArrayList<String> participants) : execution(Facture FactureActivity.saveBillInDB(..) && args(pseudo, participants));
+    public pointcut callOnCreate() : execution(void MainActivity.onCreate(..)) || execution(void UtilisateurActivity.onCreate(..)) || execution(void FactureActivity.onCreate(..));
+    public pointcut callOnAddUser(Utilisateur u) : execution(boolean UtilisateurActivity.saveUserInDb(..)) && args(u);
+    public pointcut callOnSaveBill(Facture f) : execution(void FactureActivity.saveFactureInDB(..)) && args(f) ;
 
 
     after (): callOnCreate()
@@ -34,13 +36,16 @@ public aspect InteractionDB {
                 AppCompatActivity activity = (AppCompatActivity) thisJoinPoint.getThis();
                 userdb = new UserDataBase(activity);
                 billsDb = new FactureDataBase(activity);
-                //Utilisateur u = new Utilisateur("Arnaud" , "DENIZET", "arnaudden", 0);
-                //userdb.addUser(u);
-                //System.out.println(" aspect ajout utilisateur");
-                ArrayList<Utilisateur> listUser = userdb.getUsers();
+                listUser = userdb.getUsers();
+                listBills = billsDb.getBills(listUser);
                 for(int i =0; i<listUser.size(); i++)
                         {
-                            System.out.println(listUser.get(i).getPrenom());
+                            System.out.println(listUser.get(i).toString());
+                        }
+                System.out.println(listBills.size());
+                for(int i =0; i<listBills.size(); i++)
+                        {
+                            System.out.println(listBills.get(i).toString());
                         }
                 String className = activity.getClass().toString();
                 Field[] fields = activity.getClass().getFields();
@@ -57,64 +62,62 @@ public aspect InteractionDB {
                                 e.printStackTrace();
                                 }
                             }
+
+                            if(f.getName() == "listBills")
+                            {
+                                try{
+                                    f.set(activity, listBills);
+                                }
+                                catch(Exception e) {
+                                e.printStackTrace();
+                                }
+
+                            }
                         }
             }
 
-    void around (Utilisateur u) : callOnAddUser(u)
+    boolean around (Utilisateur u) : callOnAddUser(u)
     {
         System.out.println(" aspect ajout utilisateur");
-        if( isUsernameAvailable(u))
+        if(isUsernameAvailable(u))
+        {
             userdb.addUser(u);
             System.out.println(u.toString() + "a été ajouté dans la BDD");
-    }
+            return true;
 
-    void around( String pseudo, ArrayList<String> participants) : callOnSaveBill(pseudo, participants)
-    {
-        System.out.println(" aspect initialize facture");
-
-        ArrayList<Utilisateur> allUsers = userdb.getUsers();
-        ArrayList<Utilisateur> involvedUsers;
-        int index = 0;
-        for( int i = 0; i < allUsers.size; i++)
-        {
-            if( allUsers.get(i).getPseudo == pseudo)
-            {
-                involvedUsers.add( index, allUsers.get(i));
-                index++;
-            }
         }
+        return false;
 
-        for( int i = 0; i < allUsers.size; i++)
-        {
-            for( int j = 0; j < participants.size; j++)
-            {
-               if( allUsers.get(i).getPseudo() == participants.get(j))
-               {
-                   involvedUsers.add( index, allUsers.get(i));
-                   index++;
-               }
-            }
-        }
-        return involvedUsers;
     }
-
-    // Corriger comment on obtient la facture...
-     void after() returning(Facture f) : call( callOnSaveBill(..))
-     {
-        System.out.println(" aspect add facture");
-        billsDb.addFacture(f);
-        System.out.println(f.toString() + "a été ajouté dans la BDD");
-      }
 
     boolean isUsernameAvailable(Utilisateur u)
     {
-        ArrayList<Utilisateur> listUser = userdb.getUsers();
-        for( i = 0; i < listUser.size(); i++)
+
+        System.out.println("Aspect IsUsernameAvailable " + listUser.size());
+        boolean isAvailable = true;
+        for( int i = 0; i < listUser.size(); i++)
         {
-            if( listUser.get(i).getPseudo() == u.getPseudo())
-                return false
+            System.out.println(listUser.get(i).getPseudo() == u.getPseudo());
+            if(listUser.get(i).getPseudo().equals(u.getPseudo()))
+            {
+                isAvailable = false;
+            }
+
         }
-        return true;
+        return isAvailable;
+    }
+
+
+
+    void around(Facture f): callOnSaveBill(f)
+    {
+        billsDb.addFacture(f);
+        for (int i =0; i < f.getListePersonneIntervenant().size() ; i++)
+        {
+            Utilisateur u = f.getListePersonneIntervenant().get(i);
+            userdb.updateDette(u);
+        }
+
     }
 
 }

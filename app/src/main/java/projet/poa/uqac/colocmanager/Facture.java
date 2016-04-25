@@ -17,11 +17,11 @@ public class Facture {
 
     private String description;
 
-    private Utilisateur payeur;
+    private Utilisateur utilisateurIntervenant;
+
 
     private ArrayList<Utilisateur> listePersonneIntervenant;
 
-    private Utilisateur beneficiaire;
 
     private double coutTotal;
 
@@ -29,11 +29,13 @@ public class Facture {
 
     private boolean factureReglee;
 
+    private boolean isAcheteur;
+
 
     public Facture(String date,
                    String t, String magasin,
                    String descr, Utilisateur u,
-                   double coutTot)
+                   double coutTot, boolean isReglee)
     {
 
         dateAchat = date;
@@ -44,15 +46,23 @@ public class Facture {
 
         description = descr;
 
-        beneficiaire = u;
+        utilisateurIntervenant = u;
+
+        listePersonneIntervenant = new ArrayList<>();
+
+        listePersonneIntervenant.add(u);
 
         coutTotal = coutTot;
+        coutParPersonne = coutTot;
+
+
+        factureReglee = isReglee;
     }
 
     public Facture(String date,
                    String t, String magasin,
                    String descr, ArrayList<Utilisateur> listPerson,
-                   double coutTot)
+                   double coutTot, boolean isAch)
     {
 
         dateAchat = date;
@@ -63,15 +73,25 @@ public class Facture {
 
         description = descr;
 
-        beneficiaire = listPerson.get(0);
-
-        listPerson.remove(0);
-
         listePersonneIntervenant = listPerson;
 
         coutTotal = coutTot;
 
-        coutParPersonne = coutTot/listePersonneIntervenant.size();
+        isAcheteur = isAch;
+
+        if(isAch)
+        {
+            coutParPersonne = coutTot/(listePersonneIntervenant.size()+1);
+        }
+        else if (!isAch)
+        {
+            coutParPersonne = coutTot/listePersonneIntervenant.size();
+        }
+
+        for (int i =0; i<listePersonneIntervenant.size(); i++)
+        {
+            listePersonneIntervenant.get(i).setDette(coutParPersonne);
+        }
 
         factureReglee = false;
     }
@@ -108,5 +128,15 @@ public class Facture {
         return factureReglee;
     }
 
+    public String toString()
+    {
+        String str = "Facture datant du " + dateAchat + " acheté à " + magasinAchat +
+                      " pour une valeur de " + coutParPersonne + " par personne. Il y a :";
+        for(int i =0; i<listePersonneIntervenant.size();i++)
+        {
+            str = str + listePersonneIntervenant.get(i).getPseudo() + " ";
+        }
 
+        return str;
+    }
 }

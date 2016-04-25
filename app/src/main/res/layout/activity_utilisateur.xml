@@ -38,7 +38,8 @@
                 android:id="@+id/TV_Nom"
                 android:singleLine="true"
                 android:paddingTop="20dp"
-                android:textSize="20dp"/>
+                android:textSize="20dp"
+                android:inputType="textPersonName"/>
         </LinearLayout>
 
         <LinearLayout
@@ -64,7 +65,7 @@
                 android:singleLine="true"
                 android:paddingTop="20dp"
                 android:textSize="20dp"
-                android:onClick="saveUser"/>
+                />
         </LinearLayout>
 
         <LinearLayout

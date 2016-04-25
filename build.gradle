@@ -7,15 +7,13 @@ buildscript {
         jcenter()
         mavenCentral()
         maven { url 'https://github.com/Archinamon/GradleAspectJ-Android/raw/master' }
-        maven {
-            url 'https://repo.spring.io/libs-milestone'
-        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.0.0'
-
+        classpath 'org.aspectj:aspectjtools:1.8.9'
+        classpath 'org.aspectj:aspectjrt:1.8.9'
         classpath 'com.uphyca.gradle:gradle-android-aspectj-plugin:0.9.14'
-        classpath 'com.archinamon:AspectJ-gradle:1.1.1'
+        classpath 'com.archinamon:AspectJ-gradle:1.1.2'
 
 
         // NOTE: Do not place your application dependencies here; they belong

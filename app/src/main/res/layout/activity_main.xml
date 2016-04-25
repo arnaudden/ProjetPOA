@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="projet.poa.uqac.colocmanager.MainActivity"
+    tools:context="projet.poa.uqac.colocmanager.Activities.MainActivity"
     >
 
     <android.support.design.widget.AppBarLayout

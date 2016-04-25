@@ -16,16 +16,19 @@ import projet.poa.uqac.colocmanager.Utilisateur;
 public class FactureDataBase extends SQLiteOpenHelper
 {
     private ArrayList<Facture> listBills;
+
+
     public FactureDataBase(Context context)
     {
         super(context, "CollocManager.db", null, 1);
         SQLiteDatabase database = this.getWritableDatabase();
+        onCreate(database);
         listBills = new ArrayList<Facture>();
     }
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("DROP TABLE IF EXISTS bills  ");
+        //db.execSQL("DROP TABLE IF EXISTS bills  ");
         db.execSQL("CREATE TABLE IF NOT EXISTS bills("+
                         "id INTEGER PRIMARY KEY AUTOINCREMENT, "+
                         "date_facture string, "+
@@ -52,7 +55,7 @@ public class FactureDataBase extends SQLiteOpenHelper
 
         for(int i=0 ; i<f.getListePersonneIntervenant().size(); i++)
         {
-            this.getWritableDatabase().execSQL("INSERT INTO bills (date_facture, titre_facture, nom_magasin, description, beneficiaire, cout_total, facture_reglee VALUES ('" +
+            this.getWritableDatabase().execSQL("INSERT INTO bills (date_facture, titre_facture, nom_magasin, description, beneficiaire, cout_total, facture_reglee) VALUES ('" +
                     f.getDateAchat() + "','" +
                     f.getTitre() + "','" +
                     f.getMagasinAchat() + "','" +
@@ -96,18 +99,22 @@ public class FactureDataBase extends SQLiteOpenHelper
             {
                 isRegle = false;
             }
-            else
+
 
 
 
             for (int i=0; i<listUser.size(); i++)
             {
-                if(listUser.get(i).getPseudo() == pseudo)
+
+                if(listUser.get(i).getPseudo().equals(pseudo))
                 {
                     Facture f = new Facture(date,titre,magasin,description,listUser.get(i), cout, isRegle);
+                    System.out.println("On getBills " + f.toString());
                     listBills.add(f);
                 }
             }
+
+
         }
 
         return listBills;

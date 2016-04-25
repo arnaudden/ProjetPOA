@@ -17,10 +17,7 @@ public class Utilisateur {
     private double dette;
 
 
-    public Utilisateur()
-    {
 
-    }
 
     public Utilisateur(String n, String p, String pseudo, double d)
     {
@@ -55,7 +52,7 @@ public class Utilisateur {
 
     public String toString()
     {
-        String str = "Prénom : " + prenom + " nom : " + nom + " a une dette de " + dette + " $";
+        String str = "Prénom : " + prenom + " nom : " + nom + " pseudo : " + pseudo +" a une dette de " + dette + " $";
         return str;
     }
 }

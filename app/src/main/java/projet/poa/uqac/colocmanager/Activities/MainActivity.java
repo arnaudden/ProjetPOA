@@ -19,8 +19,10 @@ import projet.poa.uqac.colocmanager.Activities.*;
 import projet.poa.uqac.colocmanager.Facture;
 import projet.poa.uqac.colocmanager.R;
 import projet.poa.uqac.colocmanager.Utilisateur;
-import projet.poa.uqac.colocmanager.database.FactureDataBase;
-import projet.poa.uqac.colocmanager.database.UserDataBase;
+
+
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,17 +35,14 @@ public class MainActivity extends AppCompatActivity {
     Animation hide_fab_utilisateur;
 
     ArrayList<Utilisateur> listUser;
-    ArrayList<Facture> listFacture;
+    ArrayList<Facture> listBills;
 
-    private UserDataBase userdb;
-    private FactureDataBase billsDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         show_fab = AnimationUtils.loadAnimation(getApplication(), R.anim.show_fab);
         hide_fab_utilisateur = AnimationUtils.loadAnimation(getApplication(), R.anim.hide_fab_utilisateur);
         hide_fab_facture = AnimationUtils.loadAnimation(getApplication(), R.anim.hide_fab_facture);
-        //userdb = new UserDataBase(this);
 
         super.onCreate(savedInstanceState);
 
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         fab_2 = (FloatingActionButton) findViewById(R.id.fab_ajouterFacture);
 
         listUser = new ArrayList<Utilisateur>();
-        listFacture = new ArrayList<Facture>();
+        listBills = new ArrayList<Facture>();
     }
 
     public void onShowFab(View v)

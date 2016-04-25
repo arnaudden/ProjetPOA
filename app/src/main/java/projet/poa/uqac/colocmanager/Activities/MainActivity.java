@@ -1,4 +1,4 @@
-package projet.poa.uqac.colocmanager;
+package projet.poa.uqac.colocmanager.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import projet.poa.uqac.colocmanager.Activities.*;
+import projet.poa.uqac.colocmanager.Facture;
+import projet.poa.uqac.colocmanager.R;
+import projet.poa.uqac.colocmanager.Utilisateur;
+import projet.poa.uqac.colocmanager.database.FactureDataBase;
+import projet.poa.uqac.colocmanager.database.UserDataBase;
+
 public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton fab_1;
@@ -29,12 +35,18 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Utilisateur> listUser;
     ArrayList<Facture> listFacture;
 
+    private UserDataBase userdb;
+    private FactureDataBase billsDb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         show_fab = AnimationUtils.loadAnimation(getApplication(), R.anim.show_fab);
         hide_fab_utilisateur = AnimationUtils.loadAnimation(getApplication(), R.anim.hide_fab_utilisateur);
         hide_fab_facture = AnimationUtils.loadAnimation(getApplication(), R.anim.hide_fab_facture);
+        //userdb = new UserDataBase(this);
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

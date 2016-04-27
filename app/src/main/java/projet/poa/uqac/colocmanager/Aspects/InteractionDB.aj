@@ -137,6 +137,12 @@ public aspect InteractionDB {
         System.out.println("In Aspect" + facture.toString());
         billsDb.updateBill(facture);
         listBills = billsDb.getBills(listUser);
+        double d = facture.getCoutParPersonne();
+        d= d *-1;
+        facture.getUtilisateurIntervenant().setDette(d);
+        Utilisateur u = facture.getUtilisateurIntervenant();
+        userdb.updateDette(u);
+        listUser = userdb.getUsers();
         AppCompatActivity activity = (AppCompatActivity) thisJoinPoint.getThis();
         Field[] fields = activity.getClass().getFields();
         Field f;

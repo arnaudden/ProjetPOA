@@ -25,6 +25,7 @@ public class Utilisateur {
         prenom = p;
         this.pseudo = pseudo;
         dette = d;
+
     }
 
     public void setDette(double d)

@@ -119,4 +119,15 @@ public class FactureDataBase extends SQLiteOpenHelper
 
         return listBills;
     }
+
+    public void updateBill(Facture f)
+    {
+        this.getWritableDatabase().execSQL("UPDATE bills" +
+                " SET facture_reglee = '1' " +
+                "WHERE titre_facture = '" + f.getTitre() +
+                "' AND date_facture = '" + f.getDateAchat() +
+                "' AND nom_magasin = '" + f.getMagasinAchat() +
+                "' AND beneficiaire = '" + f.getUtilisateurIntervenant().getPseudo() + "'");
+
+    }
 }

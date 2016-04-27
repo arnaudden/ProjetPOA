@@ -149,4 +149,19 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    public void onClickFactureReglee(View v)
+    {
+        Facture f = fAdapter.getItem(listV.getPositionForView(v));
+        System.out.println(f.toString() + " a été sélectionnée");
+        updateBillAndUserInDb(f);
+        fAdapter.updateListView(listBills);
+        listV.setAdapter(fAdapter);
+    }
+
+    public void updateBillAndUserInDb(Facture f)
+    {
+
+    }
 }

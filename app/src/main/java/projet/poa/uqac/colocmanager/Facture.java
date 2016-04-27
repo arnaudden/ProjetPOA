@@ -127,6 +127,8 @@ public class Facture {
         return factureReglee;
     }
 
+
+
     public Utilisateur getUtilisateurIntervenant() {
         return utilisateurIntervenant;
     }

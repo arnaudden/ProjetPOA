@@ -31,6 +31,7 @@ public aspect InteractionDB {
     public pointcut callOnAddUser(Utilisateur u) : execution(boolean UtilisateurActivity.saveUserInDb(..)) && args(u);
     public pointcut callOnSaveBill(Facture f) : execution(void FactureActivity.saveFactureInDB(..)) && args(f) ;
     public pointcut callConstructorFA() : execution(FactureAdapter.new(..));
+    public pointcut callUpdateBillAndUser(Facture f) : execution(void MainActivity.updateBillAndUserInDb(..)) && args(f);
 
     before() : callOnCreate()
     {
@@ -101,6 +102,8 @@ public aspect InteractionDB {
 
     }
 
+
+
     boolean isUsernameAvailable(Utilisateur u)
     {
 
@@ -118,8 +121,6 @@ public aspect InteractionDB {
         return isAvailable;
     }
 
-
-
     void around(Facture f): callOnSaveBill(f)
     {
         billsDb.addFacture(f);
@@ -131,6 +132,40 @@ public aspect InteractionDB {
 
     }
 
+    void around(Facture facture) : callUpdateBillAndUser(facture)
+    {
+        System.out.println("In Aspect" + facture.toString());
+        billsDb.updateBill(facture);
+        listBills = billsDb.getBills(listUser);
+        AppCompatActivity activity = (AppCompatActivity) thisJoinPoint.getThis();
+        Field[] fields = activity.getClass().getFields();
+        Field f;
+        for(int i =0; i<fields.length; i++)
+                {
+                    f = fields[i];
+                    if (f.getName() == "listUser")
+                    {
+                        try{
+                            f.set(activity, listUser);
+                        }
+                        catch(Exception e) {
+                        e.printStackTrace();
+                        }
+                    }
+
+                    if(f.getName() == "listBills")
+                    {
+                        try{
+                            f.set(activity, listBills);
+                        }
+                        catch(Exception e) {
+                        e.printStackTrace();
+                        }
+
+                    }
+                }
+
+    }
 
     after() : callConstructorFA()
     {
@@ -149,10 +184,10 @@ public aspect InteractionDB {
                         catch(Exception e) {
                         e.printStackTrace();
                         }
-
                     }
                 }
-
     }
+
+
 
 }

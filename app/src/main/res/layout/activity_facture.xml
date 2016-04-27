@@ -166,23 +166,18 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingTop="20dp"
-                android:text="L'acheteur participe :"
-                android:textSize="20dp"
-                android:editable="false"
-                />
 
             <CheckBox
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:text="L&apos;acheteur participe"
                 android:id="@+id/CB_isAcheteur"
-                android:singleLine="true"
-                android:paddingTop="40dp"
-                android:layout_marginLeft="20dp"
-                android:textSize="20dp" />
+                android:singleLine="false"
+                android:paddingTop="20dp"
+                android:layout_marginLeft="70dp"
+                android:textSize="20dp"
+                android:paddingBottom="20dp"
+                />
         </LinearLayout>
 
     </LinearLayout>
@@ -191,11 +186,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="450dp"
+        android:layout_marginTop="400dp"
         android:id="@+id/button"
         android:text="Enregister"
         android:textSize="40dp"
-        android:onClick="onClickSaveBill" />
+        android:onClick="onClickSaveBill"
+        android:layout_gravity="center_horizontal"/>
 
 
 

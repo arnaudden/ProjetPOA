@@ -55,7 +55,6 @@ public class Facture {
         coutTotal = coutTot;
         coutParPersonne = coutTot;
 
-
         factureReglee = isReglee;
     }
 
@@ -128,6 +127,10 @@ public class Facture {
         return factureReglee;
     }
 
+    public Utilisateur getUtilisateurIntervenant() {
+        return utilisateurIntervenant;
+    }
+
     public String toString()
     {
         String str = "Facture datant du " + dateAchat + " acheté à " + magasinAchat +
@@ -136,6 +139,8 @@ public class Facture {
         {
             str = str + listePersonneIntervenant.get(i).getPseudo() + " ";
         }
+
+        str = str + "La facture est réglée " + factureReglee;
 
         return str;
     }

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TV_titreFacture"
+        android:text="Titre Facture"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="20dp"/>
+
+    <TextView android:text="Date : " android:id="@+id/TV_date_facture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+    </TextView>
+
+    <TextView android:text="Magasin d'achat : " android:id="@+id/TV_Magasin_Achat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+    </TextView>
+
+    <TextView android:text="Description" android:id="@+id/TV_DescriptionFacture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+    </TextView>
+
+    <TextView android:text="Réglée pour : " android:id="@+id/TV_PersonneIntervenant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+    </TextView>
+
+    <TextView android:text="Valeur : " android:id="@+id/TV_PrixAchat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+    </TextView>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Réglée"
+        android:id="@+id/CB_isReglee"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onClickFactureReglee"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:enabled="false"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp" />
+
+</LinearLayout>

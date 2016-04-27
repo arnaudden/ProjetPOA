@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ListViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Utilisateur> listUser;
     ArrayList<Facture> listBills;
 
+    ListView listV;
+    private FactureAdapter fAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +58,12 @@ public class MainActivity extends AppCompatActivity {
         mainFab = (FloatingActionButton) findViewById(R.id.mainFab);
         fab_1 = (FloatingActionButton) findViewById(R.id.fab_ajouterUtilisateur);
         fab_2 = (FloatingActionButton) findViewById(R.id.fab_ajouterFacture);
-
+        listV = (ListView) findViewById(R.id.ListView01);
         listUser = new ArrayList<Utilisateur>();
         listBills = new ArrayList<Facture>();
+
+        fAdapter = new FactureAdapter(this);
+        listV.setAdapter(fAdapter);
     }
 
     public void onShowFab(View v)
@@ -85,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickMainScreen(View v)
     {
+
         if(!mainFab.isClickable())
         {
             FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) fab_1.getLayoutParams();

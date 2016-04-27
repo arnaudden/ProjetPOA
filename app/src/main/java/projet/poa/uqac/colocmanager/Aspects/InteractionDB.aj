@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import projet.poa.uqac.colocmanager.Activities.MainActivity;
 import projet.poa.uqac.colocmanager.Activities.UtilisateurActivity;
 import projet.poa.uqac.colocmanager.Activities.FactureActivity;
+import projet.poa.uqac.colocmanager.Activities.FactureAdapter;
 import projet.poa.uqac.colocmanager.database.*;
 import projet.poa.uqac.colocmanager.Utilisateur;
 import projet.poa.uqac.colocmanager.Facture;
@@ -29,7 +30,17 @@ public aspect InteractionDB {
     public pointcut callOnCreate() : execution(void MainActivity.onCreate(..)) || execution(void UtilisateurActivity.onCreate(..)) || execution(void FactureActivity.onCreate(..));
     public pointcut callOnAddUser(Utilisateur u) : execution(boolean UtilisateurActivity.saveUserInDb(..)) && args(u);
     public pointcut callOnSaveBill(Facture f) : execution(void FactureActivity.saveFactureInDB(..)) && args(f) ;
+    public pointcut callConstructorFA() : execution(FactureAdapter.new(..));
 
+    before() : callOnCreate()
+    {
+        AppCompatActivity activity = (AppCompatActivity) thisJoinPoint.getThis();
+        userdb = new UserDataBase(activity);
+        billsDb = new FactureDataBase(activity);
+        listUser = userdb.getUsers();
+        listBills = billsDb.getBills(listUser);
+
+    }
 
     after (): callOnCreate()
             {
@@ -117,6 +128,30 @@ public aspect InteractionDB {
             Utilisateur u = f.getListePersonneIntervenant().get(i);
             userdb.updateDette(u);
         }
+
+    }
+
+
+    after() : callConstructorFA()
+    {
+        FactureAdapter activity = (FactureAdapter) thisJoinPoint.getThis();
+        Field[] fields = activity.getClass().getFields();
+        Field f;
+        for(int i =0; i<fields.length; i++)
+                {
+                    f = fields[i];
+                    if(f.getName() == "listBills")
+                    {
+                        System.out.println(f.getName().toString());
+                        try{
+                            f.set(activity, listBills);
+                        }
+                        catch(Exception e) {
+                        e.printStackTrace();
+                        }
+
+                    }
+                }
 
     }
 

@@ -7,19 +7,11 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.0.0'
-
-        classpath 'com.uphyca.gradle:gradle-android-aspectj-plugin:0.9.14'
         classpath 'com.archinamon:AspectJ-gradle:1.1.2'
-
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-
     }
 }
 
 apply plugin: 'com.android.application'
-apply plugin: 'com.uphyca.android-aspectj'
 apply plugin: 'com.archinamon.aspectj'
 
 android {

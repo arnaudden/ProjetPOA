@@ -1,7 +1,6 @@
 package projet.poa.uqac.colocmanager.Activities;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,7 +86,7 @@ public class FactureAdapter extends BaseAdapter {
         String utilisateur = "Réglée pour : " + listBills.get(position).getUtilisateurIntervenant().getPseudo();
         tv_user.setText(utilisateur);
 
-        String valeur = Double.toString(listBills.get(position).getCoutParPersonne());
+        String valeur = "Montant d'achat : " + Double.toString(listBills.get(position).getCoutParPersonne()) + " $";
         tv_valeur.setText(valeur);
 
         if(!listBills.get(position).isFactureReglee())
